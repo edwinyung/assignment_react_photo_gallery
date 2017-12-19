@@ -32,8 +32,8 @@ class UsersOrder extends Component {
         return 1;
       }
       if (nameA > nameB) {
-        if (this.state.sortStatus === 'descending') return 1;
-        return -1;
+        if (this.state.sortStatus === 'descending') return -1;
+        return 1;
       }
 
       // names must be equal
