@@ -4,6 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import users from './users.js';
 import SortButton from './filter.js';
+import PageCounter from './pageCounter.js';
 
 const Gallery = ({ users }) => {
   return (
@@ -24,25 +25,39 @@ const User = ({ user }) => {
   );
 };
 
+let pageArray = [];
+for (var i = 0, len = users.length; i < len; i+=12) {
+  pageArray.push(users.slice(i, i + 12));
+}
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
       sortStatus: 'ascending',
-      users: users
+      users: users,
+      page: 1
     };
   }
 
-  handleClick = value => {
+  handlePage = (e) => {
+    this.setState({
+      users: pageArray[e.target.value]
+    })
+    
+  }
+
+  // Called within sortButton!!
+  handleClick = () => {
     if (this.state.sortStatus === 'ascending') {
-      let NewUsers = this.sortAlph(users);
+      let NewUsers = this.sortAlph(this.state.users);
       this.setState({
         sortStatus: 'descending',
         users: NewUsers
       });
     }
     if (this.state.sortStatus === 'descending') {
-      let NewUsers = this.sortAlph(users);
+      let NewUsers = this.sortAlph(this.state.users);
       this.setState({
         sortStatus: 'ascending',
         users: NewUsers
@@ -78,6 +93,7 @@ class App extends Component {
           handleClick={this.handleClick}
           sortDirection={this.state.sortStatus}
         />
+        <PageCounter pageNum={pageArray.length} handlePage={this.handlePage}/>
         <Gallery users={this.state.users} />
       </div>
     );
