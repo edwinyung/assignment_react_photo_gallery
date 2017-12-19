@@ -6,24 +6,29 @@ class UsersOrder extends Component {
   constructor() {
     super();
     this.state = {
-      sortStatus: 'ascending'
+      sortStatus: 'ascending',
+      users: users
     };
   }
 
   handleClick = () => {
     if (this.state.sortStatus === 'ascending') {
+      const newUsers = this.sortAlph(users);
       this.setState({
-        sortStatus: 'descending'
+        sortStatus: 'descending',
+        users: 
       });
     }
     if (this.state.sortStatus === 'descending') {
       this.setState({
-        sortStatus: 'ascending'
+        sortStatus: 'ascending',
+        users: this.sortAlph(users)
       });
     }
+    
   };
 
-  sort = users => {
+  sortAlph = users => {
     return users.sort(function(a, b) {
       var nameA = a.login.toUpperCase(); // ignore upper and lowercase
       var nameB = b.login.toUpperCase(); // ignore upper and lowercase
@@ -38,12 +43,12 @@ class UsersOrder extends Component {
 
       // names must be equal
       return 0;
-    });
+    }).slice(0);
   };
 
   render() {
-    return <input type="submit" />;
+    return <input type="submit" value={this.state.sortStatus} onClick={this.handleClick} />;
   }
 }
 
-export default Filter;
+export default UsersOrder;

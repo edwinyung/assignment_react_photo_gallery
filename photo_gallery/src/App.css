@@ -28,12 +28,13 @@
 }
 
 .userBox img {
-  width:150px;
+  width:80%;
   clear:both;
 }
 
 .userBox * {
   float:left;  
+  padding:5px;
 }
 
 .userBox {
@@ -43,5 +44,8 @@
   border-radius:5px;
 }
 
-
+.display {
+  display:block;
+  margin:0 auto;
+}
 
