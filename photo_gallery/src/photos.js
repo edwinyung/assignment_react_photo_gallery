@@ -4243,3 +4243,5 @@ const instagramResponse = {
     }
   ]
 }
+
+module.exports = instagramResponse;

@@ -1,0 +1,47 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.userBox img {
+  width:150px;
+  clear:both;
+}
+
+.userBox * {
+  float:left;  
+}
+
+.userBox {
+  display:inline-block;
+  border: 1px solid black;
+  margin: 5px;
+  border-radius:5px;
+}
+
+
+
