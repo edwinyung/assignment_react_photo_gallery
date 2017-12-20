@@ -8,7 +8,7 @@ import PageCounter from './pageCounter.js';
 import Search from './pageCounter.js';
 
 const Gallery = ({ users, usersFilter }) => {
-  let users = users.exec(usersFilter)
+  //  let users = users.text(usersFilter);
   return (
     <div className="display">
       {users.map(user => {
@@ -43,12 +43,12 @@ class App extends Component {
       pageArray: pageArray
     };
   }
-
-  handleSearch = e => {
-    this.setState({
-      [e.target.] = e.target.value
-    })
-  }
+  //
+  // handleSearch = e => {
+  //   this.setState({
+  //     [e.target.] = e.target.value
+  //   })
+  // }
 
   handlePage = e => {
     let pageArray = [];
