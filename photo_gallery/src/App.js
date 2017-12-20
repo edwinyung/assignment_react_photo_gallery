@@ -5,8 +5,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 import users from './users.js';
 import SortButton from './filter.js';
 import PageCounter from './pageCounter.js';
+import Search from './pageCounter.js';
 
-const Gallery = ({ users }) => {
+const Gallery = ({ users, usersFilter }) => {
+  let users = users.exec(usersFilter)
   return (
     <div className="display">
       {users.map(user => {
@@ -25,27 +27,39 @@ const User = ({ user }) => {
   );
 };
 
-let pageArray = [];
-for (var i = 0, len = users.length; i < len; i+=12) {
-  pageArray.push(users.slice(i, i + 12));
-}
-
 class App extends Component {
   constructor() {
     super();
+    let pageArray = [];
+    for (var i = 0, len = users.length; i < len; i += 12) {
+      pageArray.push(users.slice(i, i + 12));
+    }
     this.state = {
       sortStatus: 'ascending',
       users: users,
-      page: 1
+      displayUsers: pageArray[0],
+      usersFilter: /.+/,
+      page: 1,
+      pageArray: pageArray
     };
   }
 
-  handlePage = (e) => {
+  handleSearch = e => {
     this.setState({
-      users: pageArray[e.target.value]
+      [e.target.] = e.target.value
     })
-    
   }
+
+  handlePage = e => {
+    let pageArray = [];
+    for (var i = 0, len = this.state.users.length; i < len; i += 12) {
+      pageArray.push(this.state.users.slice(i, i + 12));
+    }
+    this.setState({
+      displayUsers: this.state.pageArray[e.target.value],
+      pageArray: pageArray
+    });
+  };
 
   // Called within sortButton!!
   handleClick = () => {
@@ -93,8 +107,12 @@ class App extends Component {
           handleClick={this.handleClick}
           sortDirection={this.state.sortStatus}
         />
-        <PageCounter pageNum={pageArray.length} handlePage={this.handlePage}/>
-        <Gallery users={this.state.users} />
+        <Search />
+        <PageCounter
+          pageNum={this.state.pageArray.length}
+          handlePage={this.handlePage}
+        />
+        <Gallery users={this.state.displayUsers} />
       </div>
     );
   }
